@@ -1,0 +1,30 @@
+extends layout
+
+block content
+	script(src='./javascripts/index.js')
+	script(src='./javascripts/grid/pqgrid.min.js')
+	link(rel='stylesheet',href='./javascripts/grid/pqgrid.min.css')
+
+	h1= title
+
+	form
+		div
+			label ID
+			input(type='text', id='userId')
+			br
+			label 年齢
+			input(type='text', id='age', style='width:4em;')
+			br
+			サイト情報
+			div(style='margin-left:2em;')
+				label 名称
+				input(type='text', id='site_name')
+				br
+				label URL
+				input(type='text', id='site_url', style='width:20em;')
+			input(type='button', id='saveButton', value='保存')
+			input(type='button', id='searchButton', value='検索')
+		p
+			label 検索結果
+			div(id='dataTable')
+

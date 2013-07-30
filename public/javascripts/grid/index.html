@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+	<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js'></script>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css" />
+    <script src='pqgrid.min.js'></script>
+	<link rel='stylesheet' href='pqgrid.min.css' />
+<script type="text/javascript">
+
+$(document).ready(function() 
+{
+  function renderProgressBarDiv(ui)
+  {
+    return '<div class="progress"><span>' +ui.rowData.percent_done+'%</span></div>';
+  }
+
+  dat = [
+     { slot_num:1, percent_done:0, status_msg:"test in progress" },
+     { slot_num:2, percent_done:0, status_msg:"test in progress" } ];
+
+
+  var obj = { flexHeight: true };
+  obj.colModel = [{ title: "SLOT", width: 75, dataIndx:'slot_num', dataType:'integer'  },
+                  { title: "PROGRESS", width: 175, dataIndx:'percent_done', render:renderProgressBarDiv },
+                  { title: "STATUS", width: 350, dataIndx:'status_msg', dataType:'string' }];
+  obj.dataModel = { data: dat};
+
+  obj.topVisible = false;
+  obj.bottomVisible = false;
+  obj.numberCell = false;
+  obj.columnBorders = false;
+  obj.rowBorders = false;
+  obj.editable = false;
+  obj.hoverMode = false;
+  obj.sortable = false;
+  obj.scrollModel = {vertical:false, horizontal: false};
+
+  obj.refresh = function(event,ui) {
+     $(".progress").each(function(event,ui) {
+        $(this).progressbar({
+           value:parseInt( $(this).text() )
+        }).children("span").appendTo(this);
+     });
+  }
+
+  var $grid = $("#grid_array").pqGrid(obj);
+});
+</script>   
+</head>
+<body>
+	<div id="grid_array"></div>
+</body>
+</html>

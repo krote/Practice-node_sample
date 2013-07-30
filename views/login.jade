@@ -1,0 +1,16 @@
+extends login_layout
+
+block content
+	.container
+		.hero-unit
+			.row-fluid
+				.span9
+					h2 ログイン
+					h1 = title
+				.span3
+					form(action='/login')
+						input(type='text', name='email', placeholder='Email')
+						input(type='password', name='password', placeholder='Password')
+						label.checkbox.gray ログイン状態を保存
+							input(type='checkbox')
+						button.btn.btn-primary(type='submit') ログイン
